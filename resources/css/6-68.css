@@ -1,0 +1,30 @@
+body {
+  margin-left: 20%;
+  margin-right: 20%;
+  font-family: sans-serif;
+  border: 20px solid lightgray;
+}
+
+article {
+  margin: 20px;
+}
+
+hr {
+  margin: 20px;
+  color: lightgray;
+}
+
+h3 {
+  font-weight: bold;
+}
+
+.summary {
+  border-left: 3px solid lightgray;
+  padding: 3px;
+}
+
+.date {
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: blue;
+}
