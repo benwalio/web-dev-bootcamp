@@ -1,5 +1,5 @@
 body {
-  background-color: #696969;
+  background-color: #232323;
 }
 
 header {
@@ -7,6 +7,24 @@ header {
   color: white;
 }
 
+.square {
+  width: 30%;
+  background: purple;
+  padding-bottom: 30%;
+  margin: 1.66%;
+  float: left;
+}
+
+.btn-secondary:not(:disabled):not(.disabled).active {
+  background-color: #191970;
+  color: white;
+}
+
 .info-bar {
   background-color: white;
+}
+
+#game-container {
+  margin: 0 auto;
+  max-width: 600px;
 }
