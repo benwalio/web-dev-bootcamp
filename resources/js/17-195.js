@@ -3,7 +3,19 @@ var squares = document.querySelectorAll(".square");
 var pickedColor = pickWinColor();
 var rgbHint = document.querySelector(".rgb-hint");
 var messageDisplay = document.querySelector(".info-alert");
+var resetButton = document.querySelector("#new-color-set");
 rgbHint.textContent = pickedColor;
+
+resetButton.addEventListener("click", function() {
+  colors = generateRandomColors(6);
+  pickedColor = pickWinColor();
+  rgbHint.textContent = pickedColor;
+
+  for (let i = 0; i < squares.length; i++) {
+    squares[i].style.backgroundColor = colors[i];
+  }
+  document.querySelector("header").style.backgroundColor = "#191970";
+});
 
 for (let i = 0; i < squares.length; i++) {
 
@@ -16,7 +28,7 @@ for (let i = 0; i < squares.length; i++) {
     if (clickedColor === pickedColor) {
       // console.log("winner winner");
       messageDisplay.classList.remove("invisible");
-      messageDisplay.innerText = "winner winner";
+      messageDisplay.innerText = "winner winner!";
       changeColors(clickedColor);
     } else {
       // console.log("try to stop sucking");
@@ -31,6 +43,7 @@ function changeColors (color) {
   for (let i = 0; i < squares.length; i++) {
     squares[i].style.backgroundColor = color;
   }
+  document.querySelector("header").style.backgroundColor = color;
 }
 
 function pickWinColor() {
