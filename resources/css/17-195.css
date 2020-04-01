@@ -2,9 +2,26 @@ body {
   background-color: #232323;
 }
 
-header {
+header,
+.selected,
+.btn:hover {
   background-color: #191970;
   color: white;
+}
+
+button, input {
+  overflow: hidden;
+}
+
+.btn.focus,
+.btn:focus {
+  box-shadow: none;
+}
+
+.selected,
+.btn:hover {
+  border: 1px solid #191970;
+  border-radius: 0px 0px 5px 5px;
 }
 
 .square {
@@ -15,13 +32,12 @@ header {
   float: left;
 }
 
-.btn-secondary:not(:disabled):not(.disabled).active {
-  background-color: #191970;
-  color: white;
-}
-
 .info-bar {
   background-color: white;
+}
+
+.info-bar * {
+  margin-bottom: 0px;
 }
 
 #game-container {

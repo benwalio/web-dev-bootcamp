@@ -4,7 +4,39 @@ var pickedColor = pickWinColor();
 var rgbHint = document.querySelector(".rgb-hint");
 var messageDisplay = document.querySelector(".info-alert");
 var resetButton = document.querySelector("#new-color-set");
+var easyButton = document.querySelector("#easy-btn");
+var hardButton = document.querySelector("#hard-btn");
 rgbHint.textContent = pickedColor;
+
+easyButton.addEventListener("click", function() {
+  easyButton.classList.add("selected");
+  hardButton.classList.remove("selected");
+  colors = generateRandomColors(3);
+  pickedColor = pickWinColor();
+  rgbHint.textContent = pickedColor;
+
+  for (let i = 0; i < squares.length; i++) {
+    squares[i].style.backgroundColor = colors[i];
+  }
+
+  for (let i = 3; i < squares.length; i++) {
+    squares[i].style.backgroundColor = "#232323";
+  }
+  document.querySelector("header").style.backgroundColor = "#191970";
+});
+
+hardButton.addEventListener("click", function() {
+  hardButton.classList.add("selected");
+  easyButton.classList.remove("selected");
+  colors = generateRandomColors(6);
+  pickedColor = pickWinColor();
+  rgbHint.textContent = pickedColor;
+
+  for (let i = 0; i < squares.length; i++) {
+    squares[i].style.backgroundColor = colors[i];
+  }
+  document.querySelector("header").style.backgroundColor = "#191970";
+});
 
 resetButton.addEventListener("click", function() {
   colors = generateRandomColors(6);

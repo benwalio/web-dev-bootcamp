@@ -18,16 +18,16 @@
         <h2 class="title">guessing game</h2>
       </header>
 
-      <div class="info-bar d-flex flex-row justify-content-center px-5">
-        <button id="new-color-set" class="btn btn-secondary col-2 py-0">new colors</button>
-        <div class="col-2 info-alert invisible"></div>
-        <div class="col-2">
-          <div class="row">
-            <div class="btn-group" role="group">
-              <button class="btn btn-secondary py-0 active">easy</button>
-              <button class="btn btn-secondary py-0">hard</button>
-            </div>
-          </div>
+      <div class="info-bar d-flex flex-row justify-content-center px-4">
+        <label id="new-color-set" for="new-color-button" class="btn py-0">new colors</label>
+        <div class="col-2 info-alert text-center py-0 invisible"></div>
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <label id="easy-btn" class="btn py-0">
+            <input type="radio" name="options">easy
+          </label>
+          <label id="hard-btn" class="btn py-0 selected">
+            <input type="radio" name="options">hard
+          </label>
         </div>
       </div>
 
