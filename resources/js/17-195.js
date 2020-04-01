@@ -24,6 +24,8 @@ hardButton.addEventListener("click", function() {
 });
 
 resetButton.addEventListener("click", function() {
+  resetButton.innerText = "new colors";
+  messageDisplay.innerText = "";
   colors = generateRandomColors(numOfColors);
   pickedColor = pickWinColor();
   rgbHint.textContent = pickedColor;
@@ -72,6 +74,7 @@ for (let i = 0; i < squares.length; i++) {
 }
 
 function changeColors (color) {
+  resetButton.innerText = "play again?";
   for (let i = 0; i < numOfColors; i++) {
     squares[i].style.backgroundColor = color;
   }
