@@ -1,4 +1,5 @@
-var colors = generateRandomColors(6);
+var numOfColors = 6;
+var colors = generateRandomColors(numOfColors);
 var squares = document.querySelectorAll(".square");
 var pickedColor = pickWinColor();
 var rgbHint = document.querySelector(".rgb-hint");
@@ -9,37 +10,21 @@ var hardButton = document.querySelector("#hard-btn");
 rgbHint.textContent = pickedColor;
 
 easyButton.addEventListener("click", function() {
+  numOfColors = 3;
   easyButton.classList.add("selected");
   hardButton.classList.remove("selected");
-  colors = generateRandomColors(3);
-  pickedColor = pickWinColor();
-  rgbHint.textContent = pickedColor;
-
-  for (let i = 0; i < squares.length; i++) {
-    squares[i].style.backgroundColor = colors[i];
-  }
-
-  for (let i = 3; i < squares.length; i++) {
-    squares[i].style.backgroundColor = "#232323";
-  }
-  document.querySelector("header").style.backgroundColor = "#191970";
+  setColors(numOfColors);
 });
 
 hardButton.addEventListener("click", function() {
+  numOfColors = 6;
   hardButton.classList.add("selected");
   easyButton.classList.remove("selected");
-  colors = generateRandomColors(6);
-  pickedColor = pickWinColor();
-  rgbHint.textContent = pickedColor;
-
-  for (let i = 0; i < squares.length; i++) {
-    squares[i].style.backgroundColor = colors[i];
-  }
-  document.querySelector("header").style.backgroundColor = "#191970";
+  setColors(numOfColors);
 });
 
 resetButton.addEventListener("click", function() {
-  colors = generateRandomColors(6);
+  colors = generateRandomColors(numOfColors);
   pickedColor = pickWinColor();
   rgbHint.textContent = pickedColor;
 
@@ -48,6 +33,21 @@ resetButton.addEventListener("click", function() {
   }
   document.querySelector("header").style.backgroundColor = "#191970";
 });
+
+function setColors (num) {
+  colors = generateRandomColors(num);
+  pickedColor = pickWinColor();
+  rgbHint.textContent = pickedColor;
+
+  for (let i = 0; i < squares.length; i++) {
+    squares[i].style.backgroundColor = colors[i];
+  }
+
+  for (let i = num; i < squares.length; i++) {
+    squares[i].style.backgroundColor = "#232323";
+  }
+  document.querySelector("header").style.backgroundColor = "#191970";
+};
 
 for (let i = 0; i < squares.length; i++) {
 
@@ -72,7 +72,7 @@ for (let i = 0; i < squares.length; i++) {
 }
 
 function changeColors (color) {
-  for (let i = 0; i < squares.length; i++) {
+  for (let i = 0; i < numOfColors; i++) {
     squares[i].style.backgroundColor = color;
   }
   document.querySelector("header").style.backgroundColor = color;
