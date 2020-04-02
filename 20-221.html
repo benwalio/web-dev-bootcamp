@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     <title>todo | 20-221</title>
     <link rel="stylesheet" type="text/css" href="./resources/css/20-221.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <script src="./resources/js/jquery-3.4.1.min.js"></script>
     <script src="https://kit.fontawesome.com/19e455966c.js" crossorigin="anonymous"></script>
   </head>
@@ -13,14 +14,14 @@
   <body>
     <div id="container" class="todo-list">
       <h1 class="title">
-        to-do list
+        to-do list <i class="fa fa-plus"></i>
       </h1>
-      <input type="text" name="add-new-todo" placeholder="add a new todo">
+      <input id="create-new-todo" type="text" name="add-new-todo" placeholder="add a new todo">
       <div class="tasks">
         <ul>
-          <li><span>x</span> task 1</li>
-          <li><span>x</span> task 2</li>
-          <li><span>x</span> task 3</li>
+          <li><span><i class="fa fa-trash"></i></span> task 1</li>
+          <li><span><i class="fa fa-trash"></i></span> task 2</li>
+          <li><span><i class="fa fa-trash"></i></span> task 3</li>
         </ul>
       </div>
     </div>
