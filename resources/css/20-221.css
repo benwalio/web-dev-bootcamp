@@ -1,0 +1,16 @@
+
+
+.done {
+  color: gray;
+  text-decoration: line-through;
+}
+
+.deleted {
+  visibility: hidden;
+}
+
+#container {
+  width: 360px;
+  margin: 0 auto;
+  border: 2px solid gray;
+}
