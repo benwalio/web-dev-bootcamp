@@ -1,4 +1,5 @@
 .DS_Store
 *.icloud
 secrets.*
+*.mp3
 *.secret
