@@ -21,16 +21,23 @@ app.get("/speak/:animal", function (req, res) {
     sound = "mew";
   }
 
-  res.send("the " + animal + "says \'" + sound "\'!");
+  res.send("the " + animal + "says \'" + sound + "\'!");
 });
 
 app.get("/repeat/:word/:num", function (req, res) {
   let word = req.params.word;
   let num = req.params.num;
+  let words = "";
 
-  for (let i = 0; i <= num; i++) {
-    res.send(word);
+  for (let i = 0; i < num; i++) {
+    words = words + " " + word;
   }
+  
+  res.send(words);
+});
+
+app.get("*", function(req, res) {
+    res.send("404 dummy");
 });
 
 app.listen(process.env.PORT, process.env.IP, function () {
