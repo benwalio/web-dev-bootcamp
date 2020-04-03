@@ -16,7 +16,7 @@ app.get("/speak/:animal", function (req, res) {
     fish: "blub"
   }
 
-  res.send("the " + animal + "says \'" + sound[animal] + "\'!");
+  res.send("the " + animal + " says \'" + sound[animal] + "\'!");
 });
 
 app.get("/repeat/:word/:num", function (req, res) {
