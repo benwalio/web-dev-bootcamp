@@ -7,21 +7,16 @@ app.get("/", function (req, res) {
 
 app.get("/speak/:animal", function (req, res) {
   let animal = req.params.animal;
-  let sound = "pay your taxes";
-
-  if (animal === "cow") {
-    sound = "moo";
-  } else if (animal === "pig") {
-    sound = "oink";
-  } else if (animal === "monkey") {
-    sound = "monkey noise";
-  } else if (animal === "nixon") {
-    sound = "AROOOO";
-  } else if (animal === "cat") {
-    sound = "mew";
+  let sound = {
+    cow: "moo",
+    pig: "oink",
+    monkey: "monkey noise",
+    nixon: "ARRROOOOOO",
+    cat: "mew",
+    fish: "blub"
   }
 
-  res.send("the " + animal + "says \'" + sound + "\'!");
+  res.send("the " + animal + "says \'" + sound[animal] + "\'!");
 });
 
 app.get("/repeat/:word/:num", function (req, res) {
@@ -32,7 +27,7 @@ app.get("/repeat/:word/:num", function (req, res) {
   for (let i = 0; i < num; i++) {
     words = words + " " + word;
   }
-  
+
   res.send(words);
 });
 
