@@ -2,6 +2,9 @@ var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
 
+process.env.PORT = 3000;
+process.env.IP = "127.0.0.1";
+
 app.use(bodyParser.urlencoded({extended : true}));
 app.set("view engine", "ejs");
 
