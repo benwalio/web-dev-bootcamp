@@ -20,7 +20,32 @@ app.get("/result", function (req, res) {
     
     request(url, function (error, response, body) {
         if (!error && response.statusCode === 200) {
-            var data = JSON.parse(body);
+            let title_data = JSON.parse(body);
+            let imdb_id = [];
+            let data = {};
+            title_data["Search"].forEach(function (movie) {
+                if (movie["Type"] === "movie") {
+                    imdb_id.push(movie["imdbID"]);
+                }
+            })
+            
+            for ( let i = 0 ; i < imdb_id.length; i++ ) {
+                let url = base_url + api_key + "&i=" + imdb_id[i];
+                
+                request(url, function (error, response, body) {
+                    let movie_data = JSON.parse(body);
+                    // data[i] = movie_data;
+                    //console.log(movie_data);
+                    //console.log(typeof data);
+                    //data[i].append(movie_data);
+                    // data.movie = {};
+                    data.title = movie_data["Title"];
+                    data.year = movie_data["Year"];
+                    data.plot = movie_data["Plot"];
+                    console.log(data);
+                })
+            }
+            console.log(data);
             res.render("result", {data : data});
         }
     })
