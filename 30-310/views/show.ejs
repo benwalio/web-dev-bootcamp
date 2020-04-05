@@ -13,15 +13,18 @@
             <div class="description">
                 <p><%= blog.body %></p>
             </div>
-            <div class="ui mini buttons">
-                <button class="ui basic yellow button">
-                    edit
-                </button>
-                <div class="or"></div>
-                <button class="ui negative button">
-                    delete
-                </button>
-            </div>
+            <form>
+                <div class="ui mini buttons">
+                    <button class="ui basic yellow button" formaction="/blogs/<%= blog._id %>/edit">
+                        edit
+                    </button>
+                    <div class="or"></div>
+                    <button class="ui negative button" formaction="/blogs/<%= blog._id %>?_method=DELETE" formmethod="POST">
+                        delete
+                    </button>
+                </div>
+            </form>
+            
         </div>
         
 

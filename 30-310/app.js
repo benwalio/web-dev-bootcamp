@@ -3,6 +3,7 @@ var app = express();
 var methodOverride = require("method-override");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
+var sanitizer = require("express-sanitizer");
 
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
@@ -19,6 +20,7 @@ app.use(bodyParser.urlencoded({
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(methodOverride("_method"));
+app.use(sanitizer());
 
 var blogSchema = new mongoose.Schema({
     title: String,
@@ -44,6 +46,7 @@ app.get("/blogs", function(req, res) {
 });
 
 app.post("/blogs", function(req, res) {
+    req.body.blog.body = req.sanitizer(req.body.blog.body);
     Blog.create(req.body.blog, function(err, blog) {
         if (err) {
             res.render("new");
@@ -81,6 +84,7 @@ app.get("/blogs/:id/edit", function (req, res) {
 });
 
 app.put("/blogs/:id", function (req, res) {
+    req.body.blog.body = req.sanitizer(req.body.blog.body);
     Blog.findByIdAndUpdate(req.params.id, req.body.blog, function (err, blog) {
         if (err) {
             console.log("error - " + err);
@@ -92,7 +96,7 @@ app.put("/blogs/:id", function (req, res) {
 });
 
 app.delete("/blogs/:id", function (req, res) {
-    Blog.findByIdAndDelete(req.params.id, function (err, blog) {
+    Blog.findByIdAndDelete(req.params.id, function (err) {
         if (err) {
             console.log("error - " + err);
             res.redirect("/blogs/" + req.params.id);
