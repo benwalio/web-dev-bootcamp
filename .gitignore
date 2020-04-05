@@ -2,6 +2,7 @@
 *.icloud
 */node_modules/*
 /node_modules/*
+*/*/node_modules/*
 secrets.*
 *.mp3
 *.secret
