@@ -1,5 +1,6 @@
 var express = require("express");
 var app = express();
+var methodOverride = require("method-override");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 
@@ -17,6 +18,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.set("view engine", "ejs");
 app.use(express.static("public"));
+app.use(methodOverride("_method"));
 
 var blogSchema = new mongoose.Schema({
     title: String,
@@ -79,10 +81,23 @@ app.get("/blogs/:id/edit", function (req, res) {
 });
 
 app.put("/blogs/:id", function (req, res) {
-    Blog.findById(req.params.id, function (err, blog) {
+    Blog.findByIdAndUpdate(req.params.id, req.body.blog, function (err, blog) {
         if (err) {
             console.log("error - " + err);
             res.redirect("/blogs/" + req.params.id);
+        } else {
+            res.redirect("/blogs/" + req.params.id);
+        }
+    })
+});
+
+app.delete("/blogs/:id", function (req, res) {
+    Blog.findByIdAndDelete(req.params.id, function (err, blog) {
+        if (err) {
+            console.log("error - " + err);
+            res.redirect("/blogs/" + req.params.id);
+        } else {
+            res.redirect("/");
         }
     })
 });
