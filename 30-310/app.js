@@ -78,6 +78,15 @@ app.get("/blogs/:id/edit", function (req, res) {
     })
 });
 
+app.put("/blogs/:id", function (req, res) {
+    Blog.findById(req.params.id, function (err, blog) {
+        if (err) {
+            console.log("error - " + err);
+            res.redirect("/blogs/" + req.params.id);
+        }
+    })
+});
+
 app.listen(process.env.PORT, process.env.IP, function () {
     console.log("server started " + process.env.IP + ":" + process.env.PORT);
 });
