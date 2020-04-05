@@ -1,0 +1,24 @@
+<%- include("parts/header") %>
+
+<div class="ui main text container segment">
+    <div class="ui huge header">
+        new blog post
+    </div>
+    <form class="ui form" action="/blogs" method="POST">
+        <div class="field">
+            <label>title</label>
+            <input type="text" name="blog[title]" placeholder="title">
+        </div>
+        <div class="field">
+            <label>image</label>
+            <input type="text" name="blog[image]" placeholder="image">
+        </div>
+        <div class="field">
+            <label>blog content</label>
+            <textarea name="blog[body]" required></textarea>
+        </div>
+        <input class="ui violet inverted button" type="submit">
+    </form>
+</div>
+
+<%- include("parts/footer") %>
