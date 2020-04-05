@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(methodOverride("_method"));
-app.use(sanitizer());
+// app.use(sanitizer());
 
 var blogSchema = new mongoose.Schema({
     title: String,
@@ -46,7 +46,7 @@ app.get("/blogs", function(req, res) {
 });
 
 app.post("/blogs", function(req, res) {
-    req.body.blog.body = req.sanitizer(req.body.blog.body);
+    // req.body.blog.body = req.sanitizer(req.body.blog.body);
     Blog.create(req.body.blog, function(err, blog) {
         if (err) {
             res.render("new");
@@ -84,7 +84,7 @@ app.get("/blogs/:id/edit", function (req, res) {
 });
 
 app.put("/blogs/:id", function (req, res) {
-    req.body.blog.body = req.sanitizer(req.body.blog.body);
+    // req.body.blog.body = req.sanitizer(req.body.blog.body);
     Blog.findByIdAndUpdate(req.params.id, req.body.blog, function (err, blog) {
         if (err) {
             console.log("error - " + err);
