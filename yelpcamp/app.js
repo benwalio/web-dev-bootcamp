@@ -9,10 +9,12 @@ mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
-mongoose.connect("mongodb://localhost/yelpcamp");
+// mongoose.connect("mongodb://localhost/yelpcamp");
+
+mongoose.connect("mongodb+srv://ben:mellon0611@cluster0-1uxzf.mongodb.net/test?retryWrites=true&w=majority");
 
 process.env.PORT = 3000;
-process.env.IP = "127.0.0.1";
+// process.env.IP = "127.0.0.1";
 
 app.use(bodyParser.urlencoded({extended : true}));
 app.set("view engine", "ejs");
