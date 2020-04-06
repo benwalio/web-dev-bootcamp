@@ -2,10 +2,16 @@
 
 <h1>this is my show route</h1>
 
-<p><%= campground.name %> </p>
+<p><%= campground.name %></p>
 
 <img src="<%= campground.image %>" alt="">
 
 <blockquote><%= campground.description %></blockquote>
+
+<% campground.comments.forEach(function(comment){ %>
+    <p>
+        <strong><%= comment.author %></strong> - <%= comment.text %>
+    </p>
+<% }) %>
 
 <%- include("parts/footer") %>
