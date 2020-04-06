@@ -14,13 +14,19 @@ process.env.IP = "127.0.0.1";
 app.use(bodyParser.urlencoded({extended : true}));
 app.set("view engine", "ejs");
 
-var campgroundSchema = new mongoose.Schema({
-  name: String,
-  image: String,
-  description: String
-});
+var Campground = require("./models/campground");
+var Comment = require("./models/comment");
+var User = require("./models/user");
 
-var Campground = mongoose.model("Campground", campgroundSchema);
+
+
+// var campgroundSchema = new mongoose.Schema({
+//   name: String,
+//   image: String,
+//   description: String
+// });
+
+// var Campground = mongoose.model("Campground", campgroundSchema);
 
 // Campground.create({
 //       name: "graniteville",
