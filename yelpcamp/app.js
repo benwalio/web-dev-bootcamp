@@ -2,7 +2,14 @@ var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
+var passport = require("passport");
+var localStrategy = require("passport-local");
+var passportLocalMongoose = require("passport-local-mongoose");
+
 var seedDB = require("./seeds");
+var Campground = require("./models/campground");
+var Comment = require("./models/comment");
+var User = require("./models/user");
 
 seedDB();
 mongoose.set('useNewUrlParser', true);
@@ -16,13 +23,28 @@ mongoose.connect("mongodb+srv://ben:mellon0611@cluster0-1uxzf.mongodb.net/test?r
 process.env.PORT = 3000;
 process.env.IP = "127.0.0.1";
 
+app.use(require("express-session")({
+  secret: "hunter horse battery staple",
+  resave: false,
+  saveUninitialized: false
+}));
+
 app.use(bodyParser.urlencoded({extended : true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 
-var Campground = require("./models/campground");
-var Comment = require("./models/comment");
-var User = require("./models/user");
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+passport.use(new localStrategy(User.authenticate()));
+
+app.use(function(req, res, next) {
+  res.locals.currentUser = req.user;
+  next();
+});
+
 
 app.get("/", function (req, res) {
   res.render("landing");
@@ -99,7 +121,7 @@ app.get("/campgrounds/:id", function (req, res) {
 
 // comment routes
 
-app.get("/campgrounds/:id/comments/new", function (req, res) {
+app.get("/campgrounds/:id/comments/new", isLoggedIn, function (req, res) {
     Campground.findById(req.params.id, function (err, campground) {
       if (err) {
         console.log(err);
@@ -111,7 +133,7 @@ app.get("/campgrounds/:id/comments/new", function (req, res) {
   
 });
 
-app.post("/campgrounds/:id/comments", function(req, res) {
+app.post("/campgrounds/:id/comments", isLoggedIn, function(req, res) {
   Campground.findById(req.params.id, function(err, campground) {
     if (err) {
       console.log(err);
@@ -129,6 +151,53 @@ app.post("/campgrounds/:id/comments", function(req, res) {
     }
   });
 });
+
+app.get("/register", function (req, res) {
+  res.render("register");
+});
+
+app.post("/register", function (req, res) {
+  var newUser = new User({username: req.body.username});
+  User.register( newUser, req.body.password, function (err, user) {
+    if (err) {
+      console.log(err);
+      return res.render("register");
+    } else {
+      passport.authenticate("local")(req, res, function () {
+        res.redirect("/campgrounds");
+      });
+    }
+  });
+});
+
+// login routes
+
+app.get("/login", function (req, res) {
+  res.render("login");
+});
+
+app.post("/login", passport.authenticate("local", 
+  {
+    successRedirect: "/campgrounds",
+    failureRedirect: "/login"
+  }
+  ), function (req, res) {
+
+});
+
+// logout route
+
+app.get("/logout", function (req, res) {
+  req.logout();
+  res.redirect("/");
+})
+
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect("/login");
+};
 
 app.listen(process.env.PORT, process.env.IP, function () {
   console.log("server started " + process.env.IP + ":" + process.env.PORT);
