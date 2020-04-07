@@ -86,7 +86,7 @@ app.post("/login", passport.authenticate("local", {
 
 app.get("/logout", function(req, res) {
     req.logout();
-    res.redirect("home");
+    res.redirect("/");
 })
 
 function isLoggedIn (req, res, next){
