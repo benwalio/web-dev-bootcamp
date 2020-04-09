@@ -58,6 +58,10 @@
                             <p>
                                 <%= comment.text %>
                             </p>
+                            <form>
+                                <button class="btn btn-xs btn-warning" formaction="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>/edit">edit</button>
+                                <button class="btn btn-xs btn-danger" formaction="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>?_method=DELETE" formmethod="POST">delete</button>
+                            </form>
                         </div>
                     </div>
                 <% }) %>
