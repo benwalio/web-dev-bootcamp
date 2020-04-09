@@ -56,6 +56,7 @@ router.post("/", middleware.isLoggedIn, function (req, res) {
 router.get("/:id", function (req, res) {
     Campground.findById(req.params.id).populate("comments").exec(function (err, campground) {
         if (err) {
+            res.flash("error", "unable to find campground");
             console.log(err);
         } else {
             console.log(campground);
