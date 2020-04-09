@@ -45,6 +45,7 @@ router.post("/", middleware.isLoggedIn, function (req, res) {
                 console.log(err);
             } else {
                 console.log(campground);
+                res.flash("success", "successfully added campground");
                 res.redirect("/campgrounds");
             }
         }
@@ -75,12 +76,14 @@ router.get("/:id/edit", middleware.validateCampgroundOwner, function (req, res) 
 // campground edit put
 router.put("/:id", middleware.validateCampgroundOwner, function (req, res) {
     Campground.findByIdAndUpdate(req.params.id, req.body.campground, function (err, campground) {
+        res.flash("success", "successfully edited campground");
         res.redirect("/campgrounds/" + req.params.id);
     })
 });
 
 router.delete("/:id", middleware.validateCampgroundOwner, function (req, res) {
     Campground.findByIdAndDelete(req.params.id, function (err) {
+        res.flash("success", "successfully deleted campground");
         res.redirect("/campgrounds");
     })
 });
