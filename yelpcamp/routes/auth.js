@@ -3,11 +3,6 @@ var router = express.Router();
 var passport = require("passport");
 var User = require("../models/user");
 
-router.use(function (req, res, next) {
-    res.locals.currentUser = req.user;
-    next();
-});
-
 router.get("/", function (req, res) {
     res.render("landing");
 });
@@ -49,6 +44,7 @@ router.post("/login", passport.authenticate("local", {
 
 router.get("/logout", function (req, res) {
     req.logout();
+    req.flash("error", "you are now logged out");
     res.redirect("/");
 })
 
