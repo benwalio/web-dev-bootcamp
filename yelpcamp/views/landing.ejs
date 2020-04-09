@@ -1,9 +1,17 @@
-<%- include("parts/header") %>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+<link rel="stylesheet" href="/stylesheets/landing.css" type="text/css">
 
 <div class="landing-header">
-    <p>welcome to YelpCamp</p>
+    <h1>
+        welcome to YelpCamp
+    </h1>
 
-    <a href="/campgrounds" class="btn btn-lg btn-success">campground page</a>
+    <form>
+        <button formaction="/campgrounds" formmethod="GET" class="btn btn-lg btn-success">campground page</button>
+    </form>
 </div>
 
 <ul class="slideshow">
